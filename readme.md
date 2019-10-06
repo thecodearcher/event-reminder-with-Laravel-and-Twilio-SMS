@@ -309,8 +309,10 @@ Now, head back to your browser and create a custom reminder, setting the `phone 
 ***Note:** When entering the `phone number`, it is imperative to enter the country code alongside it.*
 
 ![](https://paper-attachments.dropbox.com/s_4976E89BA020A3D2419577CAF674C172C476A70D9EEED733F5F36FF9147EEB0F_1570336783535_Peek+2019-10-06+05-37.gif)
+*Gif showing how to create a reminder* 
 
 ![](https://paper-attachments.dropbox.com/s_4976E89BA020A3D2419577CAF674C172C476A70D9EEED733F5F36FF9147EEB0F_1570336986123_Slice+1.png)
+
 
 ## Conclusion.
 
