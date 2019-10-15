@@ -1,7 +1,7 @@
 ## Building an event reminder with Laravel and Twilio SMS.
-In our day to day activities, we might get busy, too busy to drop a message, check up on loved ones or to remember an appointment. Well, you could solve this by setting alarms…right? But what if you could build a system to send a message to your loved one or request your lunch at a set time without you having to do it.
+In our day to day activities, we might get too busy for seemingly simple tasks. Too busy to drop a message, check up on loved ones or to remember an appointment. You could solve this by setting alarms right? But what if there was a more efficient way for reminders to send a message to your loved one, or request your lunch at a set time without you having to do it?
 
-In this tutorial, we will learn how to use Twilio’s Programmable SMS to create an SMS reminder system with Laravel. At the end of this tutorial, you would have developed a custom SMS reminder system that alerts your users via SMS of their set activity as at when due.
+In this tutorial, we will learn how to use Twilio’s Programmable SMS to create an SMS reminder system with Laravel. At the end of this tutorial, you would have developed a custom SMS reminder system that alerts your users at a specific time via SMS.
 
 
 ## Prerequisite 
