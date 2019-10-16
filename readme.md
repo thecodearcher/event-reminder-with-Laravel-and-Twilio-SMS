@@ -46,9 +46,9 @@ Next, let’s update the environmental variables in our .`env` file located in t
 
 ## Building the Event Reminder
 ### Setting up database
-Firstly, we need to set up our database which will be used to keep track of events. If you already know how to create a MySQL database or make use of a database management application like phpMyAdmin for managing your databases then go ahead and create a database named `sms_reminder` and skip this section. If not then follow the following steps to create a MySQL database using the [MySQL cli](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+We will use a database in order to keep track of events. If you already know how to create a MySQL database or make use of a database management application like phpMyAdmin, then go ahead and create a database named `sms_reminder` and skip this section. If not, then complete the following steps to create a MySQL database using the [MySQL CLI](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
-***Note:** The following commands requires MySQL installed on your PC, you can install MySQL from the [official site](https://www.mysql.com/downloads/) for your platform.*
+***Note:** The following commands require MySQL to be installed on your computer. You can install MySQL from the [official site](https://www.mysql.com/downloads/) for your platform.*
 
 Open up your terminal and run this command to log in to MySQL:
 
@@ -56,18 +56,18 @@ Open up your terminal and run this command to log in to MySQL:
 
 ***Note:*** *Add the `-p` flag if you have a password for your MySQL instance.*
 
-Once logged in, run the following command to create a new database and also close the your session:
+Once logged in, run the following command to create a new database and also close the session:
 
     mysql> create database sms_reminder;
     mysql> exit;
 
-Next, we need to update our database credentials in our `.env`  file. Open up `.env` and make the update the following variables accordingly:
+Next, we need to update our database credentials in our `.env` file. Open up `.env` and update the following variables accordingly:
 
     DB_DATABASE=sms_reminder
     DB_USERNAME=root
     DB_PASSWORD=
 
-Now that our database is in place, we need to make a [migration](https://laravel.com/docs/5.8/migrations). We can do that by running this in the terminal. 
+Now that our database is in place, we need to make a [migration](https://laravel.com/docs/5.8/migrations). We can do that by running this command in the terminal. 
 
     $ php artisan make:migration create_reminders_table
 
