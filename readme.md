@@ -46,9 +46,9 @@ Next, let’s update the environmental variables in our .`env` file located in t
 
 ## Building the Event Reminder
 ### Setting up database
-We will use a database in order to keep track of events. If you already know how to create a MySQL database or make use of a database management application like phpMyAdmin, then go ahead and create a database named `sms_reminder` and skip this section. If not, then complete the following steps to create a MySQL database using the [MySQL CLI](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+Firstly, we need to set up our database which will be used to keep track of events. If you already know how to create a MySQL database or make use of a database management application like phpMyAdmin for managing your databases then go ahead and create a database named `sms_reminder` and skip this section. If not then follow the following steps to create a MySQL database using the [MySQL cli](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
-***Note:** The following commands require MySQL to be installed on your computer. You can install MySQL from the [official site](https://www.mysql.com/downloads/) for your platform.*
+***Note:** The following commands requires MySQL installed on your PC, you can install MySQL from the [official site](https://www.mysql.com/downloads/) for your platform.*
 
 Open up your terminal and run this command to log in to MySQL:
 
@@ -56,23 +56,23 @@ Open up your terminal and run this command to log in to MySQL:
 
 ***Note:*** *Add the `-p` flag if you have a password for your MySQL instance.*
 
-Once logged in, run the following command to create a new database and also close the session:
+Once logged in, run the following command to create a new database and also close the your session:
 
     mysql> create database sms_reminder;
     mysql> exit;
 
-Next, we need to update our database credentials in our `.env` file. Open up `.env` and update the following variables accordingly:
+Next, we need to update our database credentials in our `.env`  file. Open up `.env` and make the update the following variables accordingly:
 
     DB_DATABASE=sms_reminder
     DB_USERNAME=root
     DB_PASSWORD=
 
-Now that our database is in place, we need to make a [migration](https://laravel.com/docs/5.8/migrations). We can do that by running this command in the terminal. 
+Now that our database is in place, we need to make a [migration](https://laravel.com/docs/5.8/migrations). We can do that by running this in the terminal. 
 
     $ php artisan make:migration create_reminders_table
 
 This will generate a migration file found in the `database/migrations` directory.
-Now open up the project in your favourite text editor/IDE so we can make necessary adjustments to it. Let’s start off by updating our migration file to include the fields needed for our table. Open up the newly created migration file and make the following changes to the `up()` method:
+Now open up the project in your favourite text editor/IDE so we can make necessary adjustments to it. Let’s start off by updating our migration file to include the fields needed for our table. Open up the just created migration file and make the following changes to the `up()` method:
 
         public function up()
         {
@@ -85,13 +85,12 @@ Now open up the project in your favourite text editor/IDE so we can make necessa
             });
         }
 
-This means we have a database table named `reminders` expecting to have the `id`, `name`, `mobile_no`, `timezoneoffset` and `message` fields. Laravel automatically adds the `created_at` and `updated_at` fields for us using the `$table->timestamps()`. To apply these changes, we have to run the migration command in the terminal:
+This means we have a database table named `reminders` expecting to have the `id`, `name`, `mobile_no`, `timezoneoffset` and `message` fields. Laravel automatically adds the  `created_at` and `updated_at` fields for us using the `$table->timestamps()`. To effect these changes, we have to run the migration command in the terminal:
 
     $ php artisan migrate
 
-This will create the table in our database with the fields mentioned above.
-
-Now let’s generate a [model](https://laravel.com/docs/5.8/eloquent#introduction) for our table. [Eloquent model](https://laravel.com/docs/5.8/eloquent#introduction) makes it easier to query our database without having to write raw sql queries. Run the following command to generate a model for our reminders table: 
+This will create the table on our database with the fields mentioned above.
+Now let’s also generate a [model](https://laravel.com/docs/5.8/eloquent#introduction) for our table. [Eloquent model](https://laravel.com/docs/5.8/eloquent#introduction) makes it easier to query our database without having to write raw sql queries. Run the following command to generate a model for our reminds table: 
 
     $ php artisan make:model Reminder
 
@@ -99,17 +98,15 @@ This will generate a file named `Reminder.php` in the `app/` directory.
 
 ## Creating Reminders
 
-We have successfully set up our database and also migrated our tables. Now let’s write out our logic for getting and storing a user’s reminder. Generate a [controller](https://laravel.com/docs/5.8/controllers) for handling requests by opening up a terminal in the project directory and running the following command:
+We have successfully set up our database and also migrated our tables, now let’s write out our logic for getting and storing a user’s reminder.  Next, let’s generate a [controller](https://laravel.com/docs/5.8/controllers) which we will use for handling requests in our application. Open up a terminal in the project directory and run the following command:
 
     $ php artisan make:controller ReminderController
 
-Open up `app/Http/Controllers/ReminderController.php`, which was just generated by the above command and make the following changes:
+Now, open up `app/Http/Controllers/ReminderController.php` which was just generated by the above command and make the following changes:
 
     <?php
     namespace App\Http\Controllers;
-
     use Illuminate\Http\Request;
-
     class ReminderController extends Controller
     {
         public function create(Request $request)
@@ -120,19 +117,17 @@ Open up `app/Http/Controllers/ReminderController.php`, which was just generated 
                 'time' => 'required',
                 'message' => 'required',
             ]);
-
             $reminder = new Reminder();
             $reminder->mobile_no = $validatedData['mobile_no'];
             $reminder->timezoneoffset = Carbon::parse("{$validatedData['date']} {$validatedData['time']}");
             $reminder->message = $validatedData['message'];
             $reminder->save();
-
             return view('welcome', ['success' => "Event reminder for {$reminder->timezoneoffset} set"]);
         }
     }
     
 
-The `create()` method receives the data needed to create an event from the `$request` body and then [validates](https://laravel.com/docs/5.8/validation#introduction) the data using the `request→validate()` method. After which, the validated data is then stored in our database. 
+The function created above receives the needed data to create an event from the `$request` body and then [validates](https://laravel.com/docs/5.8/validation#introduction) the data using the `request→validate()` method. After which, the validate data is then stored in our database. 
 
 ***Note:** [Carbon](https://carbon.nesbot.com/) is used to convert the `time` and `date` from the user input into a proper datetime stamp.*
 
