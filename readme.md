@@ -3,24 +3,22 @@ In our day to day activities, we might get too busy for seemingly simple tasks. 
 
 In this tutorial, we will learn how to use Twilio’s Programmable SMS to create an SMS reminder system with Laravel. At the end of this tutorial, you would have developed a custom SMS reminder system that alerts your users at a specific time via SMS.
 
-
-## Prerequisite 
+## Prerequisites 
 
 In order to follow this tutorial, you will need the following:
 
-- [C](https://getcomposer.org)[omposer](https://getcomposer.org) installed on your local machine.
+- [Composer](https://getcomposer.org) installed on your local machine.
 - [MySQL](https://www.mysql.com/downloads/) setup on your local machine.
 - Basic knowledge of the [Laravel Framework](https://laravel.com/docs/5.8/).
 - A [Twilio account](https://www.twilio.com/try-twilio).
 
-
 ## Setting up Our Project
 
-Let’s get started by creating a new Laravel project. We will do so using Composer. If you have Laravel installed, you can also create a new project using the [Laravel](https://laravel.com/docs/5.8/installation) command. The command below creates a new Laravel project using Composer [create-project](https://getcomposer.org/doc/03-cli.md#create-project) command:
+Let’s get started by creating a new Laravel project. We will do so using Composer. If you have Laravel installed, you can also create a new project using the [Laravel](https://laravel.com/docs/5.8/installation) command. The command below creates a new Laravel project using Composer [create-project](https://getcomposer.org/doc/03-cli.md#create-project):
 
     $ composer create-project --prefer-dist laravel/laravel event-reminder "5.8.*"
 
-This will generate a Laravel project  (`event-reminder`) in our working directory. 
+This will generate a Laravel project (`event-reminder`) in our working directory. 
 
 ### Setting up Twilio SDK
 Next, let’s install the Twilio PHP SDK which we will use for sending out SMS reminders. Open up a terminal and navigate into the just created Laravel project (`event-reminder`) and run the following command:
