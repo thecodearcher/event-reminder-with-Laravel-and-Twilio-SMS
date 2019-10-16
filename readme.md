@@ -316,11 +316,11 @@ Now, head back to your browser and create a custom reminder, setting the `phone 
 
 ## Conclusion.
 
-Awesome! At this point you should have a working SMS based reminder system. And also, you have learnt how to make use of Twilio’s programmable SMS for sending out SMS from your Laravel application and you also saw how to create a custom artisan command in a Laravel application and how to run it as a daemon. 
+Awesome! At this point you should have a working SMS based reminder system. You have learned how to make use of Twilio’s programmable SMS for sending out SMS from your Laravel application and you also saw how to create a custom artisan command in a Laravel application and how to run it as a daemon. 
 
-If you will like to take a look at the complete source code for this tutorial, you can find it on [Github](https://github.com/thecodearcher/event-reminder-with-Laravel-and-Twilio-SMS). 
+If you would like to take a look at the complete source code for this tutorial, you can find it on [Github](https://github.com/thecodearcher/event-reminder-with-Laravel-and-Twilio-SMS). 
 
-You can also take this further by running your daemon using [Supervisor](http://supervisord.org/). Supervisor can be used to monitor your daemon and to restart your daemon if it fails.
+You can also take this further by running your daemon using [Supervisor](http://supervisord.org/). Supervisor can be used to monitor your daemon and restart it upon failure.
 
 I’d love to answer any question(s) you might have concerning this tutorial. You can reach me via
 
