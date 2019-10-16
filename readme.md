@@ -133,9 +133,9 @@ The function created above receives the needed data to create an event from the 
 
 ## Scheduling the SMS alerts
 
-Now we have been able to save details for an event let’s proceed to actually sending out the SMS at due time. To do this, we will make use of [Laravel artisan command](https://laravel.com/docs/5.8/artisan#generating-commands) for writing a custom command to send sms to users if the time set for an event is equal or greater than the current time and we will have to run this command every second to ensure we don’t delay on sending out the SMS as at when due. Tasks like this which requires running a command at intervals can easily be done with a [Cron job](https://laravel.com/docs/5.8/scheduling) but unfortunately, cron jobs only support scheduling tasks at a minimum of one minute (60 seconds) interval, hence we can’t really make use of it in this use case. The only way to successfully run our command as a [daemon](https://en.wikipedia.org/wiki/Daemon_(computing)) i.e we will wrap our command logic in an infinite `while`  loop and then using the PHP `[sleep()](https://www.php.net/manual/en/function.sleep.php)`  method we will delay execution of the loop for one second at every iteration.
+Now that we are able to save details for an event, let’s proceed to actually sending out the SMS at the appointed time. To do this, we will make use of [Laravel's Artisan command](https://laravel.com/docs/5.8/artisan#generating-commands) for writing a custom command to send SMS to users if the time set for an event is equal or greater than the current time. This command will run every second to ensure we don’t delay on sending out the SMS. Tasks that require running a command at set intervals can easily be done with a [cron job](https://laravel.com/docs/5.8/scheduling). Unfortunately, cron jobs only support scheduling tasks at a minimum of one minute (60 seconds) intervals, hence we can’t really make use of it in this use case. The only way to successfully run our command is by using a [daemon](https://en.wikipedia.org/wiki/Daemon_(computing)). We will wrap our command logic in an infinite `while` loop and then using the PHP `[sleep()](https://www.php.net/manual/en/function.sleep.php)` method we will delay execution of the loop for one second at every iteration.
 
-Now, let’s proceed to create our custom command. Open up your terminal in the project directory and run the following command to create a custom artisan command:
+Now, let’s proceed to create our custom command. Open up your terminal in the project directory and run the following command to create a custom Artisan command:
 
     $ php artisan make:command SendReminder
 
@@ -143,10 +143,12 @@ This will generate a file (`app/Console/Commands/SendReminder.php`) now open up 
 
     <?php
     namespace App\Console\Commands;
+
     use App\Reminder;
     use Carbon\Carbon;
     use Illuminate\Console\Command;
     use Twilio\Rest\Client;
+
     class SendReminder extends Command
     {
         /**
@@ -195,9 +197,10 @@ This will generate a file (`app/Console/Commands/SendReminder.php`) now open up 
             }
         }
     }
-    
 
-Let’s take a closer look at what is happening in the  `handle` function. We wrapped our entire logic in a `while()` loop then, we initialized the Twilio SDK using our Twilio credentials which we stored as environmental variables in the earlier section of this article. After which we then get the current datetime in our time zone (`Africa/Lagos 🇳🇬`) which was also used to store the datetime in our database. Next, we query the database for reminders equal to the current time and it’s `status`  is set to `pending` we then proceed to send out each reminder which was gotten from the query while also updating their status to `sent`.  After successful execution of this circle, we then delay the code execution by `one second`  using the `sleep(1)` method called at the end of the loop. This will ensure our loop is delayed for at least a second before continuing the loop iteration. Now when ever we run our command using the `$signature`, it will stay keep running our logic for every second until it is destroyed.
+Let’s take a closer look at what is happening in the `handle()` function. We wrapped our entire logic in a `while()` loop and initialized the Twilio PHP SDK using our Twilio credentials stored in `.env`. The current datetime in our local time zone (which for me is `Africa/Lagos 🇳🇬`). This was also used to store the datetime in our database.
+
+Next, we query the database for reminders equal to the current time and set its `status` to `pending`. Each reminder will then be delivered via SMS while also updating their status to `sent`. After successful execution of this circle, we then delay the code execution by `one second` using the `sleep(1)` method called at the end of the loop. This will ensure our loop is delayed for at least a second before continuing the loop iteration. Now, whenever we run our command using the `$signature`, it will keep running our logic for every second until it is destroyed.
 
 ## Setting Up Our User Interface
 
