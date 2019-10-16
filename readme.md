@@ -205,7 +205,7 @@ Next, we query the database for reminders equal to the current time and set its 
 
 ## Setting Up Our User Interface
 
-At this point, we have successfully written out our logic for both storing and also sending out our event reminders now let’s build our user interface which our users will use to send needed information for creating a reminder.  We will make use of [Bootstrap](http://getbootstrap.com) to ease styling of our forms. Open up `/resources/views/welcome.blade.php` and make the following changes:
+At this point, we have successfully written out our logic for both storing and sending out our event reminders. Now let’s build the user interface which our users will use to submit needed information for creating a reminder. We will make use of [Bootstrap](http://getbootstrap.com) to ease styling of our forms. Open up `/resources/views/welcome.blade.php` and make the following changes:
 
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -271,9 +271,8 @@ At this point, we have successfully written out our logic for both storing and a
         </div>
     </body>
     </html>
-    
 
-With our form set, and pointed towards the [named route](https://laravel.com/docs/6.x/routing#named-routes) `add-reminder` let’s proceed to create the route. Now open up `routes/web.php`  and make the following changes:
+With our form set and pointed towards the [named route](https://laravel.com/docs/6.x/routing#named-routes) `add-reminder`, let’s proceed to create the route. This route will submit the form parameters of our reminder. Now open up `routes/web.php` and make the following changes:
 
     <?php
     /*
