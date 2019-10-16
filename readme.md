@@ -21,19 +21,17 @@ Let’s get started by creating a new Laravel project. We will do so using Compo
 This will generate a Laravel project (`event-reminder`) in our working directory. 
 
 ### Setting up Twilio SDK
-Next, let’s install the Twilio PHP SDK which we will use for sending out SMS reminders. Open up a terminal and navigate into the just created Laravel project (`event-reminder`) and run the following command:
+Next, let’s install the Twilio PHP SDK which we will use for sending out SMS reminders. Open up a terminal and navigate into the newly created Laravel project (`event-reminder`) and run the following command:
 
     $ composer require twilio/sdk
 
-Having done that, let’s grab our Twilio credentials which we will use for setting up the SDK.  Head over to your Twilio [dashboard](https://www.twilio.com/console) and copy out both your `account_sid` and  `auth_token`:
+Having done that, let’s grab our Twilio credentials. We will use these for setting up access to the SDK. Head over to your Twilio [dashboard](https://www.twilio.com/console) and copy both your `account_sid` and `auth_token`:
 
 ![](https://paper-attachments.dropbox.com/s_4976E89BA020A3D2419577CAF674C172C476A70D9EEED733F5F36FF9147EEB0F_1570334783755_Group+8.png)
 
-
-In addition, you need a SMS enabled number. Navigate to the [Phone Number](https://www.twilio.com/console/phone-numbers/incoming) section and also copy out your active phone number:
+In addition, you will need an SMS enabled number. Navigate to the [Phone Number](https://www.twilio.com/console/phone-numbers/incoming) section and also copy your active phone number:
 
 ![](https://paper-attachments.dropbox.com/s_4976E89BA020A3D2419577CAF674C172C476A70D9EEED733F5F36FF9147EEB0F_1570334840529_Group+9.png)
-
 
 Next, let’s update the environmental variables in our .`env` file located in the project root and add the following:
 
