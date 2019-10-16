@@ -297,10 +297,9 @@ Well that has been a lot of coding! Now let’s actually test our application. O
 
     $ php artisan serve
 
-You should see a message printed out on your terminal with the url to your application, typically `http://127.0.0.1:8000`. Now open up your browser and navigate to the said url, you should be greeted with something similar to this:
+You should see a message printed out on your terminal with the URL to your application, typically `http://127.0.0.1:8000`. Now open up your browser and navigate to the specified URL, you should be greeted with something similar to this:
 
 ![](https://paper-attachments.dropbox.com/s_4976E89BA020A3D2419577CAF674C172C476A70D9EEED733F5F36FF9147EEB0F_1570332605741_Screenshot+from+2019-10-06+04-29-55.png)
-
 
 Next, with your Laravel application still running, let’s start our custom daemon by running our custom artisan command. Open up another instance of your terminal (still in the project directory) and run the custom artisan command using it’s defined `$signature`:
 
